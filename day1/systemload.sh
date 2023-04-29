@@ -1,14 +1,17 @@
 
-# Check if script is being run as root
-if [ $(id -u) -ne 0 ]; then
-    echo "This script must be run as root"
-    exit 1
+# Ensure the script is run as root
+if [[ $EUID -ne 0 ]]; then
+   echo "This script must be run as root" 
+   exit 1
 fi
 
-#I'm Creating log file if it doesn't exist
-if [ ! -f /var/log/system-load ]; then
-    touch /var/log/system-load
-fi
+while true; do
+    # Get the current date and time
+    timestamp=$(date '+%Y-%m-%d %H:%M:%S')
 
-# Get system load and write to log file
-uptime >> /var/log/system-load
+    loadavg=$(uptime | awk '{print $10" "$11" "$12}')
+    echo "${timestamp} ${loadavg}" >> /var/log/system-load
+
+    # Wait for 1 minute 
+    sleep 60
+done
