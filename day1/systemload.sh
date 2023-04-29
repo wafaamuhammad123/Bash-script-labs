@@ -7,10 +7,10 @@ fi
 
 while true; do
     # Get the current date and time
-    timestamp=$(date '+%Y-%m-%d %H:%M:%S')
+    TIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')
 
-    loadavg=$(uptime | awk '{print $10" "$11" "$12}')
-    echo "${timestamp} ${loadavg}" >> /var/log/system-load
+    LOADAVG=$(uptime | awk '{print $10" "$11" "$12}')
+    echo "${TIMESTAMP} ${  LOADAVG}" >> /var/log/system-load
 
     # Wait for 1 minute 
     sleep 60
