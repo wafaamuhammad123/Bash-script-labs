@@ -10,7 +10,7 @@ while true; do
     TIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')
 
     LOADAVG=$(uptime | awk '{print $10" "$11" "$12}')
-    echo "${TIMESTAMP} ${  LOADAVG}" >> /var/log/system-load
+    echo "${TIMESTAMP} ${LOADAVG}" >> /var/log/system-load
 
     # Wait for 1 minute 
     sleep 60
